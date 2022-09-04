@@ -1,0 +1,43 @@
+<div class="">
+  <div class="">
+    <h2>{{name}}'s Dashboard</h2>
+  </div>
+</div>
+
+<div class="">
+  <div class="">
+    <h3>Create a New Blog:</h3>
+
+    <form class="">
+      <div class="">
+        <label for="blog-title">Blog Title:</label>
+        <input class="form-input" type="text" id="blog-title" name="blog-title"/>
+      </div>
+      <div class="">
+        <label for="blog-text">New Blog:</label>
+        <textarea class="form-input" id="blog-text" name="blog-text"></textarea>
+      </div>
+      <div class="">
+        <button type="submit" class="">Create</button>
+      </div>
+    </form>
+  </div>
+
+  {{#if blog.length}}
+  <div class="">
+    <h3>Blog History:</h3>
+
+    {{#each blog.user_id === id as |blog|}}
+    <div class="">
+      <div class="">
+        <h4><a href="/blog/{{blog.id}}">{{blog.name}}</a></h4>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="./js/dashboard.js"></script>
+
+<script src="./js/profile.js"></script>

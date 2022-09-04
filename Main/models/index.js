@@ -1,9 +1,32 @@
-const a /* build const from used file */ = require(/* insert './file' here */);
-const b /* build const from used file */ = require(/* insert './file' here */);
+const User = require('./User');
+const Blog = require('./Blog');
+const Comment = require('./Comment');
 
+User.hasMany(Blog, {
+    foreignKey: 'user_id',
+    onDelete: "CASCADE"
+});
 
-// Insert relationships here 
-// User.hasMany();
-// Character.belongsTo();
+Blog.belongsTo(User, {
+    foreignKey: 'user_id'
+});
 
-module.exports = {/* insert consts to export here */};
+User.hasMany(Comment, {
+    foreignKey: 'user_id',
+    onDelete: "CASCADE"
+});
+
+Comment.belongsTo(User, {
+    foreignKey: 'user_id'
+});
+
+Blog.hasMany(Comment, {
+    foreignKey: 'blog_id',
+    onDelete: 'CASCADE'
+});
+
+Comment.belongsto(Blog, {
+    foreignKey: 'blog_id'
+});
+
+module.exports = { User, Blog, Comment };

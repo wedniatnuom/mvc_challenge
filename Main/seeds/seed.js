@@ -1,26 +1,25 @@
 const sequelize = require('../config/connection');
-const { /* require seed constants from models */ } = require('../models');
+const { User, Blog, Comment } = require('../models');
 
-// Example consts below that json the data so we can use it
-// const characterData = require('./characterData.json');
-// const userData = require('./userData.json');
-
+const userData = require('./userData.json');
+const blogData = require('./blogData.json');
+const commentData = require('./commentData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
-//   const users = await User.bulkCreate(userData, {
-//     individualHooks: true,
-//     returning: true,
-//   });
+  const users = await User.bulkCreate(userData, {
+    individualHooks: true,
+    returning: true,
+  });
 
-//   for (const character of characterData) {
-//     await Character.create({
-//       ...character,
-//       user_id: users[Math.floor(Math.random() * users.length)].id,
-//     });
-//   }
-
+  for (const blog of blogData) {
+    await Blog.create({
+      ...blog,
+      user_id: users[Math.floor(Math.random() * users.length)].id,
+    });
+  };
+  
   process.exit(0);
 };
 

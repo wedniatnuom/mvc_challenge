@@ -1,7 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
-const { Blog } = require('.');
 
 class Blog extends Model {};
 
@@ -22,7 +21,7 @@ Blog.init(
             allowNull: false,
             defaultValue: DataTypes.NOW,
         },
-        text_data: {
+        blog_data: {
             type: DataTypes.STRING,
             allowNull: false,
         },

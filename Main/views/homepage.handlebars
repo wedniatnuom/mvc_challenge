@@ -1,15 +1,46 @@
+<nav class="bg-success d-flex ">
+  <div class="col-2 text-left">
+    <a href="/" style="color: #000000; text-decoration: none;">
+      <span class="material-symbols-outlined">
+        home
+      </span>
+    </a>
+  </div>
+  <div class="col-6 text-center">TITLE</div>
+  <div class="col-2 text-center">
+    <a href="/dashboard/1{{!--Need to change to :id once login is verified--}} " style="color: #000000; text-decoration: none;">
+    Dash
+    </a>
+    </div>
+  <div class="col-2 text-center"> 
+    <a href="/login" style="color: #000000; text-decoration: none;">
+      Login
+    </a>
+    </div>
+</nav>
+
 {{#each blogs as |blog| }}
-<div class="row mb-4 project">
-  <div class="col-md-5">
-    <h2>     
-      <a href="/blog/{{blog.id}}">{{blog.name}}</a>
-    </h2>
-    <p>Created by {{blog.user.name}} on {{format_date blog.date_created}}</p>
-  </div>
-  <div class="col-md-7">
-    <p>
-      {{blog.blog_text}}
-    </p>
-  </div>
+
+<div class=" flex-column justify-content-center col-6">
+  <a href="/blog/{{blog.id}}" style="color: #000000; text-decoration: none;">
+    <div class="row m-1 project border border-primary bg-secondary">
+      <div class="col-6">
+        <h2>
+          {{blog.title}}
+        </h2>
+        <p>Created by {{blog.user.name}} on {{format_date blog.date_created}}</p>
+      </div>
+      <div class="col-6">
+        <p>
+          {{blog.blog_data}}
+        </p>
+      </div>
+    </div>
+  </a>
 </div>
+
 {{/each}}
+
+<script>
+
+</script>

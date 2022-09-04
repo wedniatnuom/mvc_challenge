@@ -16,4 +16,45 @@ router.get('/', async (req, res) => {
     res.render('homepage', { blogs });
   });
 
+  router.get('/login', (req, res) => {
+    if (req.session.logged_in) {
+        res.redirect("/homepage");
+        return;
+    }
+    res.render("login");
+});
+
+router.get('/blog/:id', async (req, res) => {
+    const blogData = await Blog.findByPk(req.params.id);
+    console.log(blogData);
+    res.render('blog', { blogData });
+})
+
+router.get('/dashboard/:id', withAuth, async (req, res) => {
+    const userData = await User.findByPk(req.params.id, {
+        attributes: { exclude: ['password'] },
+        include: [{ model: Blog, Comment,
+        attributes: ['user_id', 'title', 'blog_data', 'id'] 
+    }],
+      });
+      console.log(userData);
+      const blogs = userData.blogs.map((user) => user.get(({plain: true})));
+      const test = {blogs, logged_in: true};
+      console.log(blogs);
+     
+      if (!userData) {
+        console.log("No user")
+        res.render('dashboard', {
+          logged_in: req.session.logged_in 
+        });
+        } else {
+        res.render('dashboard', { userData, blogs });
+        }
+
+    // const userData = await User.findByPk(req.params.id);
+    // console.log(userData);
+    // res.render('dashboard', { userData});
+})
+
+
 module.exports = router;

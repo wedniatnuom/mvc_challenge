@@ -27,11 +27,16 @@ router.get("/login", (req, res) => {
 //Get specific blog page
 router.get("/blog/:id", async (req, res) => {
   const blogData = await Blog.findByPk(req.params.id, {
-    include: [{ model: User, attributes: ["id", "name"] }],
+    include: [
+      { model: User, attributes: ["id", "name"] },
+      { model: Comment, include: [
+        { model: User, attributes: ["name"]}
+      ] }
+    ],
   });
-  console.log(blogData.get({ plain: true }));
+ 
   let blog = blogData.get({ plain: true });
-
+  console.log(blog);
   res.render("blog", { blog });
 });
 
@@ -47,7 +52,7 @@ router.get("/dashboard/:id", withAuth, async (req, res) => {
       },
     ],
   });
-  const blogs = userData.blogs.map((user) => user.get({ plain: true }));
+  const blogs = userData.blogs.map((user,) => user.get({ plain: true }));
   const test = { blogs, logged_in: true };
 
   if (!userData) {

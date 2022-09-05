@@ -20,7 +20,7 @@
   </div>
 </nav>
 
-<div class="d-flex col-6 m-2 bg-secondary">
+<div class="d-flex col-6 m-2 bg-light">
   <div class="d-flex flex-column">
     <div class="d-flex flex-row">
       <div class="col-9 text-left">{{blog.title}}</div>
@@ -32,6 +32,21 @@
   </div>
 </div>
 <div>
+
+
+{{#each blog.projects as |comment|}}
+    <div class="col-4 m-2 bg-light">
+      <div class="d-flex flex-row">
+        <div>
+          <p>{{comment.user.name}}: {{comment.comment_text}}</p>
+        </div>
+      </div>
+      
+    </div>
+    {{/each}}
+
+
+
 <div class="form-group">
   <label for="comment-form"></label>
   <input class="form-input" type="text" id="comment-form" placeholder="Comment" />
@@ -40,3 +55,8 @@
   <button id="submit-button">Submit</button>
 </div>
 </div>
+
+
+<script>
+
+</script>

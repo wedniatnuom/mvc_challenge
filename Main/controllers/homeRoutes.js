@@ -41,8 +41,8 @@ router.get("/blog/:id", async (req, res) => {
 });
 
 //Go to user's dashboard, redirect to login if !logged_in
-router.get("/dashboard/:id", withAuth, async (req, res) => {
-  const userData = await User.findByPk(req.params.id, {
+router.get("/dashboard", withAuth, async (req, res) => {
+  const userData = await User.findByPk(req.session.user_id, {
     attributes: { exclude: ["password"] },
     include: [
       {

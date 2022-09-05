@@ -8,7 +8,7 @@
   </div>
   <div class="col-6 text-center">TITLE</div>
   <div class="col-2 text-center">
-    <a href="/dashboard/1{{!--Need to change to :id once login is verified--}} "
+    <a href="/dashboard/"
       style="color: #000000; text-decoration: none;">
       Dash
     </a>
@@ -39,7 +39,8 @@
     <div class="col-4 m-2 bg-light" data-id="{{comment.id}}">
       <div class="d-flex flex-row">
         <div>
-          <p>{{comment.user.name}}: {{comment.comment_text}}</p>
+          <p>{{comment.user.name}}: {{comment.comment_text}}{{format_date comment.date_created}}</p>
+        <button data-id="{{comment.id}}" class="btn btn-light" type="button">X</button>
         </div>
       </div>
     </div>

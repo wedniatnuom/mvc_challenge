@@ -11,8 +11,6 @@ router.post("/", withAuth, async (req, res) => {
       blog_id: req.body.blogId,
       user_id: req.session.user_id,
     });
-    console.log(req.body);
-    console.log(newComment);
     res.status(200).json(newComment);
   } catch (err) {
     res.status(400).json(err);
@@ -29,7 +27,7 @@ router.delete("/:id", withAuth, async (req, res) => {
       },
     });
     if (!commentData) {
-      res.status(404).json({ message: "No blog found with this id!" });
+      res.status(404).json({ message: "No comment found with this id!" });
       return;
     }
     res.status(200).json(commentData);

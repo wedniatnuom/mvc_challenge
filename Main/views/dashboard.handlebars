@@ -25,14 +25,14 @@
   <div class="">
     <h3>Create a New Blog:</h3>
 
-    <form class="">
+    <form class="col-6">
       <div class="">
-        <label for="blog-title">Blog Title:</label>
-        <input class="form-input" type="text" id="blog-title" name="blog-title" />
+        <label for="blog-title"></label>
+        <input class="" type="text" id="blog-title" name="blog-title" placeholder="New Title"/>
       </div>
       <div class="">
-        <label for="blog-text">New Blog:</label>
-        <textarea class="form-input" id="blog-text" name="blog-text"></textarea>
+        <label for="blog-text"></label>
+        <textarea class="" id="blog-text" name="blog-text" placeholder="New Blog Entry"></textarea>
       </div>
       <div class="">
         <button type="submit" class="">Create</button>
@@ -44,9 +44,10 @@
   <div class="">
     <h3>Blog History:</h3>  
     {{#each blogs as |blog|}}
-    <div class="col-6 bg-secondary">
-      <div class="">
+    <div class="col-4 bg-secondary">
+      <div class="d-flex flex-row">
         <h4><a href="/blog/{{blog.id}}" style="color: #000000; text-decoration: none;">{{blog.title}}</a></h4>
+        <div class="">{{blog.blog_data}}</div>
       </div>
     </div>
     {{/each}}

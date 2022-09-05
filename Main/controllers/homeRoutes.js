@@ -14,7 +14,8 @@ router.get("/", async (req, res) => {
 
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {
-    res.redirect("/homepage");
+    req.session.destroy();
+    res.redirect("/login");
     return;
   }
   res.render("login");
@@ -41,13 +42,12 @@ router.get("/dashboard/:id", withAuth, async (req, res) => {
       },
     ],
   });
-  console.log(session.logged_in);
   const blogs = userData.blogs.map((user) => user.get({ plain: true }));
   const test = { blogs, logged_in: true };
 
   if (!userData) {
     console.log("No user");
-    res.render("dashboard", {
+    res.render("login", {
       logged_in: req.session.logged_in,
     });
   } else {

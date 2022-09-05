@@ -25,6 +25,7 @@
     <div class="d-flex flex-row">
       <div class="col-9 text-left">{{blog.title}}</div>
       <div class="col-6 text-right">{{format_date blog.date_created}}</div>
+      <p hidden id="blog-id">{{blog.id}}</p>
     </div>
     <div class="text-center">{{blog.blog_data}}</div>
 
@@ -33,30 +34,79 @@
 </div>
 <div>
 
-
-{{#each blog.projects as |comment|}}
-    <div class="col-4 m-2 bg-light">
+  <div class="comment-section" >
+    {{#each blog.projects as |comment|}}
+    <div class="col-4 m-2 bg-light" data-id="{{comment.id}}">
       <div class="d-flex flex-row">
         <div>
           <p>{{comment.user.name}}: {{comment.comment_text}}</p>
         </div>
       </div>
-      
     </div>
     {{/each}}
+  </div>
 
 
 
-<div class="form-group">
-  <label for="comment-form"></label>
-  <input class="form-input" type="text" id="comment-form" placeholder="Comment" />
-</div>
-<div>
-  <button id="submit-button">Submit</button>
-</div>
+
+  <div class="form-group">
+    <label for="comment-form"></label>
+    <input class="form-input" type="text" id="comment-form" placeholder="Comment" />
+  </div>
+  <div>
+    <button id="submit-btn">Submit</button>
+  </div>
 </div>
 
 
 <script>
+
+{
+
+}
+
+  // add new comment
+  async function comment(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const text = document.getElementById('comment-form').value.trim();
+    const blogId = document.getElementById('blog-id').textContent.trim();
+    console.log(blogId)
+    if (text) {
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        body: JSON.stringify({ text, blogId }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (response.ok) {
+        location.reload()
+      } else {
+        alert('Failed to create comment');
+      };
+    };
+  };
+
+  let comment_el = document.getElementById('submit-btn');
+ comment_el.addEventListener('click', (e) => comment(e));
+
+
+  // delete comment
+  const deleteComment = async (event) => {
+
+    if (event.target.hasAttribute('data-id')) {
+      const id = event.target.getAttribute('data-id');
+
+      const response = await fetch(`/api/comments/${id}`, {
+        method: 'DELETE'
+      });
+      if (response.ok) {
+        location.reload();
+      } else {
+        alert('Failed to delete comment');
+      };
+    };
+  };
+
+  document.querySelector('.comment-section').addEventListener('click', deleteComment);
 
 </script>

@@ -5,10 +5,6 @@ const { User } = require("../../models");
 router.post("/login", async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-    console.log(req.body.password);
-    console.log(userData);
-    console.log(userData.checkPassword(req.body.password));
-
     if (!userData) {
       console.log("incorrect user data");
       res
@@ -34,16 +30,17 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// piggy backing off the login route for logout/req.session.destroy()
-
-// router.post('/logout', (req, res) => {
-//   if (req.session.logged_in) {
-//     req.session.destroy(() => {
-//       res.status(204).end();
-//     });
-//   } else {
-//     res.status(404).end();
-//   }
-// });
+router.post('/signup', (req, res) => {
+  try {
+    const newUser = User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    res.status(200).json(newUser)
+  } catch (err) {
+    res.status(400).json(err);
+  };
+});
 
 module.exports = router;

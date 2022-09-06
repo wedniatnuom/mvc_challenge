@@ -22,28 +22,30 @@
         <input class="form-input" type="password" id="password-login" name="password" required />
       </div>
       <div class="">
-        <button id="login-btn" class="btn btn-secondary" type="button">login</button>
+        <button id="login-btn" class="btn btn-light" type="button">login</button>
       </div>
     </form>
   </div>
   <div class="">
+
+
     <h2>Signup</h2>
 
     <form class="">
       <div class="">
         <label for="name-signup">name:</label>
-        <input class="" type="text" id="name-signup" required />
+        <input class="" type="text" id="signup-name" required />
       </div>
       <div class="">
         <label for="email-signup">email:</label>
-        <input class="" type="text" id="email-signup"required />
+        <input class="" type="text" id="signup-email" required />
       </div>
       <div class="p">
         <label for="password-signup">password:</label>
-        <input class="" type="password" id="password-signup" />
+        <input class="" type="password" id="signup-password" required/>
       </div>
       <div class="">
-        <button class="" type="submit" id="login-button">signup</button>
+        <button class="" type="submit" id="signup-btn">signup</button>
       </div>
     </form>
   </div>
@@ -51,16 +53,17 @@
 
 <script>
 
-  
 
-async function login(event) {
+//login function
+
+  async function login(event) {
     event.preventDefault();
     event.stopPropagation();
     console.log("login function is running");
-  
+
     const email = document.getElementById('email-login').value.trim();
     const password = document.getElementById('password-login').value.trim();
- 
+
     if (email && password) {
       console.log("awaiting fetch from routes")
       const response = await fetch('/api/login', {
@@ -68,7 +71,7 @@ async function login(event) {
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },
       });
-  
+
       if (response.ok) {
         document.location.replace('/');
       } else {
@@ -76,8 +79,38 @@ async function login(event) {
       }
     }
   };
-  
+
   let login_el = document.getElementById('login-btn');
   login_el.addEventListener('click', (e) => login(e));
-  
+
+// signup function
+
+  async function signup(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("signup function is running");
+
+const name = document.getElementById('signup-name').value.trim();
+const email = document.getElementById('signup-email').value.trim();
+const password = document.getElementById('signup-password').value.trim();
+
+    if (name && email && password) {
+      console.log("awaiting fetch from routes")
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, password }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        alert("Signed up! Please Login");
+      } else {
+        alert('Failed to signup');
+      }
+    }
+  };
+
+  let signup_el = document.getElementById('signup-btn');
+  signup_el.addEventListener('click', (e) => signup(e));
+
 </script>

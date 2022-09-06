@@ -1,46 +1,49 @@
 <nav class="bg-success d-flex ">
-  <div class="col-2 text-left">
-    <a href="/" style="color: #000000; text-decoration: none;">
-      <span class="material-symbols-outlined">
-        home
-      </span>
-    </a>
+  <div class="d-flex align-items-center col-6 justify-content-around" style="height: 60px;">
+    <div class="text-left">
+        <a href="/" style="color: #000000; text-decoration: none;">
+          <span class="material-symbols-outlined">
+            home
+          </span>
+        </a>
+      </div>
+      <div class="text-center">MVC Blog Project</div>
+      <div class="text-center">
+        <a href="/dashboard/"
+          style="color: #000000; text-decoration: none;">
+          Dash
+        </a>
+      </div>
+      <div class="text-center">
+        <a href="/login" style="color: #000000; text-decoration: none;">
+          Login/Logout
+        </a>
+      </div>
   </div>
-  <div class="col-6 text-center">TITLE</div>
-  <div class="col-2 text-center">
-    <a href="/dashboard/"
-      style="color: #000000; text-decoration: none;">
-      Dash
-    </a>
-  </div>
-  <div class="col-2 text-center">
-    <a href="/login" style="color: #000000; text-decoration: none;">
-      Login/Logout
-    </a>
-  </div>
+  
 </nav>
 
-<div class="d-flex col-6 m-2 bg-light">
+<div class="col-6 bg-light mx-auto mt-4">
   <div class="d-flex flex-column">
     <div class="d-flex flex-row">
-      <div class="col-9 text-left">{{blog.title}}</div>
-      <div class="col-6 text-right">{{format_date blog.date_created}}</div>
+      <h2 class="col-9 text-left">{{blog.title}}</h2>
+      <div class="col-6 text-left"><em>{{format_date blog.date_created}}</em></div>
       <p hidden id="blog-id">{{blog.id}}</p>
     </div>
-    <div class="text-center">{{blog.blog_data}}</div>
+    <div class="text-left mt-3">{{blog.blog_data}}</div>
 
-    <div class="text-right">Author: {{blog.user.name}} </div>
+    <div class="text-right"><h5>Author: {{blog.user.name}} </h5></div>
   </div>
 </div>
 <div>
 
-  <div class="comment-section" >
+  <div class="comment-section mt-3 ml-4" >
     {{#each blog.projects as |comment|}}
-    <div class="col-4 m-2 bg-light" data-id="{{comment.id}}">
-      <div class="d-flex flex-row">
+    <div class="col-4 m-2 bg-light p-3" data-id="{{comment.id}}">
+      <div class="d-flex  position-relative">
         <div>
           <p>{{comment.user.name}}: {{comment.comment_text}}{{format_date comment.date_created}}</p>
-        <button data-id="{{comment.id}}" class="btn btn-light" type="button">X</button>
+        <button data-id="{{comment.id}}" class="btn btn-light text-danger border-danger position-absolute" style="right:0; top:0;" type="button">X</button>
         </div>
       </div>
     </div>
@@ -50,12 +53,12 @@
 
 
 
-  <div class="form-group">
-    <label for="comment-form"></label>
-    <input class="form-input" type="text" id="comment-form" placeholder="Comment" />
-  </div>
-  <div>
-    <button id="submit-btn">Submit</button>
+  <div class="form-group col-6 ml-4">
+    <label for="form-label"></label>
+    <textarea class="form-control" type="textarea" id="comment-form" rows="4">
+      Comment...
+      </textarea>
+      <button id="submit-btn" class="btn btn-primary mt-2">Submit</button>
   </div>
 </div>
 

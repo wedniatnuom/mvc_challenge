@@ -1,38 +1,38 @@
-<nav class="bg-success d-flex ">
-  <div class="col-2 text-left">
-    <a href="/" style="color: #000000; text-decoration: none;">
-      <span class="material-symbols-outlined">
-        home
-      </span>
-    </a>
-  </div>
-  <div class="col-6 text-center">TITLE</div>
-  <div class="col-2 text-center">Dash</div>
-  <div class="col-2 text-center">
-    <a href="/login" style="color: #000000; text-decoration: none;">
-      Login/Logout
-    </a>
+<nav class="bg-success">
+  <div  class="d-flex align-items-center col-6 justify-content-around" style="height: 60px;">
+    <div class="text-left">
+        <a href="/" style="color: #000000; text-decoration: none;">
+          <span class="material-symbols-outlined">
+            home
+          </span>
+        </a>
+      </div>
+      <div class="ext-center">MVC Blog Project</div>
+      <div class="text-center">Dash</div>
+      <div class="text-center">
+        <a href="/login" style="color: #000000; text-decoration: none;">
+          Login/Logout
+        </a>
+      </div>
   </div>
 </nav>
 
-<div class="">
-  <div class="">
+<div class="col-12 text-center mt-4">
     <h2>{{userData.dataValues.name}}'s Dashboard</h2>
-  </div>
 </div>
 
-<div class="">
+<div class="col-8 ml-4">
   <div class="">
-    <h3>Create a New Blog:</h3>
+    <h3>Create a New Blog Post:</h3>
 
     <form class="col-6">
-      <div class="">
-        <label for="blog-title"></label>
-        <input class="form-input" type="text" id="blog-title" name="blog-title" placeholder="New Title" required />
+      <div class="form-group">
+        <label for="blog-title" class="form-label"></label>
+        <input class="form-control" type="text" id="blog-title" name="blog-title" placeholder="New Title" required />
       </div>
-      <div class="">
-        <label for="blog-text"></label>
-        <textarea class="form-input" id="blog-text" type="text" name="blog-text" placeholder="New Blog Entry"
+      <div class="form-group">
+        <label for="blog-text" hidden></label>
+        <textarea class="form-control" id="blog-text" rows="4" type="text" name="blog-text" placeholder="New Blog Entry"
           required></textarea>
       </div>
       <div class="">
@@ -42,16 +42,16 @@
   </div>
 
 
-  <div class="blog-list">
+  <div class="blog-list mt-5 pt-2 col-8">
     <h3>Blog History:</h3>
     {{#each blogs as |blog|}}
-    <div class="col-4 m-2 bg-secondary">
-      <div class="d-flex flex-row">
+    <div class="m-2 border border-secondary mt-3 p-3">
+      <div class="d-flex flex-column my-3">
         <h4><a href="/blog/{{blog.id}}" style="color: #000000; text-decoration: none;">{{blog.title}}</a></h4>
         <div class="">{{blog.blog_data}}</div>
       </div>
       <div class="">
-        <button data-id="{{blog.id}}" class="btn btn-light" type="button">Delete</button>
+        <button data-id="{{blog.id}}" class="btn btn-light text-danger" type="button">Delete</button>
       </div>
     </div>
     {{/each}}

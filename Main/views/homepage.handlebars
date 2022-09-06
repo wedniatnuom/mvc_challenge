@@ -1,36 +1,39 @@
-<nav class="bg-success d-flex ">
-  <div class="col-2 text-left">
+<nav class="bg-success " >
+  <div class="d-flex align-items-center col-6 justify-content-around" style="height: 60px;">
+<div class="text-left">
     <a href="/" style="color: #000000; text-decoration: none;">
       <span class="material-symbols-outlined">
         home
       </span>
     </a>
   </div>
-  <div class="col-6 text-center">TITLE</div>
-  <div class="col-2 text-center">
+  <div class="mx-2 text-center">MVC Blog Project</div>
+  <div class=" text-center">
     <a href="/dashboard" style="color: #000000; text-decoration: none;">
     Dash
     </a>
     </div>
-  <div class="col-2 text-center"> 
+  <div class="mx-2 text-center"> 
     <a href="/login" style="color: #000000; text-decoration: none;">
       Login/Logout
     </a>
     </div>
+  </div>
+  
 </nav>
 
 {{#each blogs as |blog| }}
 
-<div class=" flex-column justify-content-center col-6">
+<div class=" flex-column justify-content-center col-6 mx-auto mt-5">
   <a href="/blog/{{blog.id}}" style="color: #000000; text-decoration: none;">
-    <div class="row m-1 project border border-primary bg-secondary">
-      <div class="col-6">
-        <h2>
+    <div class="card m-1 project border border-dark border-rounded p-4 ">
+      <div class="">
+        <h2 class="card-title mb-0">
           {{blog.title}}
         </h2>
-        <p>Created by {{blog.user.name}} on {{format_date blog.date_created}}</p>
+        <small><em>Created by {{blog.user.name}} on {{format_date blog.date_created}}</em></small>
       </div>
-      <div class="col-6">
+      <div class="card-body mt-2">
         <p>
           {{blog.blog_data}}
         </p>

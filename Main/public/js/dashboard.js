@@ -1,4 +1,6 @@
-async function blog(event) {
+
+  // add new blog function
+  async function blog(event) {
     event.preventDefault();
     event.stopPropagation();
     console.log("blog function is running");
@@ -15,7 +17,7 @@ async function blog(event) {
       });
 
       if (response.ok) {
-        console.log("test to rerender")
+        location.reload()
       } else {
         alert('Failed to create blog');
       };
@@ -24,3 +26,23 @@ async function blog(event) {
 
   let blog_el = document.getElementById('create-btn');
   blog_el.addEventListener('click', (e) => blog(e));
+
+
+  // delete blog function
+ const deleteBlog = async (event) => {
+
+    if (event.target.hasAttribute('data-id')) {
+      const id = event.target.getAttribute('data-id');
+      
+      const response = await fetch(`/api/dashboard/${id}` , {
+        method: 'DELETE'
+      });
+     if (response.ok) {
+        location.reload();
+      } else {
+        alert('Failed to delete blog');
+      };
+    };
+  };
+
+document.querySelector('.blog-list').addEventListener('click', deleteBlog);
